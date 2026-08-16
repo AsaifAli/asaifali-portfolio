@@ -3,15 +3,48 @@ import Link from "next/link";
 import "./globals.css";
 import { MobileNav } from "@/components/MobileNav";
 
+const SITE_URL = "https://asaifali-portfolio.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Asaif Ali — AI/ML Engineer",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Asaif Ali — AI/ML Engineer",
+    template: "%s — Asaif Ali",
+  },
   description:
-    "AI/ML engineer building production-oriented Generative AI, Agentic AI, RAG, and LLM systems.",
+    "AI/ML engineer building production-oriented Generative AI, Agentic AI, RAG, automation, and LLM systems.",
+  applicationName: "Asaif Ali Portfolio",
+  keywords: [
+    "AI/ML Engineer",
+    "Generative AI",
+    "Agentic AI",
+    "RAG",
+    "LLM Engineering",
+    "LangGraph",
+    "AI Automation",
+    "Machine Learning",
+  ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Asaif Ali — AI/ML Engineer",
     description:
       "Production-oriented AI systems across Generative AI, Agentic AI, RAG, automation, and LLM engineering.",
+    url: SITE_URL,
+    siteName: "Asaif Ali",
     type: "website",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary",
+    title: "Asaif Ali — AI/ML Engineer",
+    description:
+      "Production-oriented AI systems across Generative AI, Agentic AI, RAG, automation, and LLM engineering.",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -22,12 +55,36 @@ const nav = [
   ["Contact", "/#contact"],
 ];
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Asaif Ali",
+  jobTitle: "AI/ML Engineer",
+  url: SITE_URL,
+  sameAs: [
+    "https://github.com/AsaifAli",
+    "https://www.linkedin.com/in/sk-asaif-ali-134873243",
+  ],
+  knowsAbout: [
+    "Generative AI",
+    "Agentic AI",
+    "RAG",
+    "LLM Engineering",
+    "Machine Learning",
+    "AI Automation",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <div className="site-noise" aria-hidden="true" />
         <header className="site-header">
           <div className="shell nav-inner">
