@@ -165,7 +165,7 @@ export function InteractiveDemo({ project, title = "Try the interactive demo", d
 
       {status === "ready" && (
         <div className="notice demo-ready">
-          Session established for <strong>{provider}</strong> / <strong>{model}</strong>. The project-specific demo action will be connected next.
+          Session established for <strong>{provider}</strong> / <strong>{model}</strong>. This proves the portfolio-to-gateway inference session; the project-specific action can be plugged into this session later.
         </div>
       )}
     </section>
