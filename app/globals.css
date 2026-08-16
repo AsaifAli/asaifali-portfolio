@@ -46,3 +46,44 @@
 .media-slot:first-child{grid-row:1 / span 2}
 @media (max-width:900px){.media-placeholder{grid-template-columns:1fr}.media-slot-grid{min-height:220px}}
 @media (max-width:600px){.media-slot-grid{grid-template-columns:1fr;grid-template-rows:repeat(3,120px)}.media-slot:first-child{grid-row:auto}}
+
+/* Light-mode readability pass: neutralize remaining hard-coded dark/light text colors. */
+@media (prefers-color-scheme: light){
+  body{color:var(--text)}
+  .brand{color:#111827}
+  .brand-dot{color:var(--accent)}
+  .nav-links a,.nav-actions a{color:#334155}
+  .nav-links a:hover,.nav-actions a:hover{color:#0f172a}
+  .section-kicker,.card-number,.pipeline-num{color:#64748b}
+  .section h2,.project-card h3,.detail-hero h1,.contact-card h2,.hero h1,.experience-card h3{color:#111827}
+  .hero h1 em{-webkit-text-stroke:1px rgba(15,23,42,.34)}
+  .hero-copy,.section-intro,.project-card p,.experience-card p,.contact-card p,.detail-hero .lead,.detail-panel p,.detail-panel li,.stack-card p,.media-placeholder p{color:#475569}
+  .project-card .eyebrow{color:#475569}
+  .card-link{color:#0f172a}
+  .signal-top{color:#64748b}
+  .signal-lines span{background:#dbe3ec}
+  .manifest code{color:#334155}
+  .pipeline{background:#fff;border-color:#d7dee7}
+  .pipeline-step{background:#fff;border-color:#d7dee7}
+  .pipeline-step strong{color:#1e293b}
+  .principles{color:#1e293b}
+  .stack-card h4{color:#1e293b}
+  .detail-panel{background:#fff;border-color:#d7dee7}
+  .detail-panel h3{color:#475569}
+  .architecture .tag,.tag{color:#475569;background:#f8fafc;border-color:#cbd5e1}
+  .status{color:#166534;background:#f0fdf4;border-color:#bbf7d0}
+  .btn{color:#1e293b;border-color:#cbd5e1}
+  .btn-primary{background:#111827;color:#fff;border-color:#111827}
+  .btn-secondary{background:#fff;color:#1e293b}
+  .btn-secondary:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
+  .field label{color:#475569}
+  .field input,.field textarea{color:#111827;border-color:#cbd5e1;background:#fff}
+  .field input::placeholder,.field textarea::placeholder{color:#94a3b8}
+  .notice{color:#475569;background:#f8fafc;border-color:#cbd5e1}
+  .muted{color:#64748b}
+  .admin-row{background:#fff;border-color:#d7dee7}
+  .media-placeholder{background:linear-gradient(180deg,#ffffff,#f8fafc);border-color:#d7dee7}
+  .media-slot{background:#f8fafc;color:#64748b;border-color:#cbd5e1}
+  .site-footer,.site-footer .footer-inner{color:#64748b}
+  .site-noise{opacity:.025}
+}
