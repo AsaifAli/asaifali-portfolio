@@ -237,50 +237,7 @@
   .demo-panel .field label{color:#64748b}
 }
 
-
-/* Portfolio next pass: mobile navigation + project card refinement */
-.mobile-nav{display:none;margin-left:auto;position:relative}
-.mobile-nav-toggle{
-  display:inline-flex;align-items:center;gap:8px;
-  min-height:40px;padding:8px 12px;border-radius:12px;
-  border:1px solid var(--line);background:var(--panel);
-  color:var(--text);font-size:12px;font-weight:700;cursor:pointer
-}
-.mobile-nav-icon{font-size:16px;line-height:1}
-.mobile-nav-panel{
-  position:absolute;right:0;top:50px;width:min(280px,calc(100vw - 28px));
-  padding:10px;border:1px solid var(--line);border-radius:18px;
-  background:color-mix(in srgb,var(--panel) 94%, transparent);
-  box-shadow:0 24px 70px rgba(0,0,0,.18);backdrop-filter:blur(18px)
-}
-.mobile-nav-panel nav{display:grid;gap:4px}
-.mobile-nav-panel a{
-  display:flex;align-items:center;min-height:44px;padding:10px 12px;
-  border-radius:12px;color:var(--text);font-size:14px
-}
-.mobile-nav-panel a:hover{background:var(--panel2)}
-.project-card{
-  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
-}
-.project-card:hover{
-  transform:translateY(-4px);
-  border-color:color-mix(in srgb,var(--accent) 28%,var(--line));
-  box-shadow:0 24px 70px rgba(0,0,0,.18);
-}
-.status{display:inline-flex;align-items:center;gap:6px}
-.status-dot{width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 10%,transparent)}
-.project-card-footer{margin-top:22px;display:flex;align-items:center;justify-content:space-between}
-.card-link{display:inline-flex;align-items:center;gap:8px}
-.card-link span:last-child{transition:transform .2s ease}
-.project-card:hover .card-link span:last-child{transform:translate(2px,-2px)}
-@media (max-width:900px){
-  .mobile-nav{display:block}
-  .nav-links,.nav-actions{display:none}
-}
-@media (prefers-color-scheme:light){
-  .mobile-nav-toggle{background:#fff;color:#111827;border-color:#cbd5e1}
-  .mobile-nav-panel{background:rgba(255,255,255,.96);border-color:#d7dee7;box-shadow:0 24px 70px rgba(15,23,42,.12)}
-  .mobile-nav-panel a{color:#111827}
-  .mobile-nav-panel a:hover{background:#f1f5f9}
-  .project-card:hover{box-shadow:0 24px 70px rgba(15,23,42,.10)}
-}
+/* Final responsive/navigation polish */
+.mobile-nav{display:none;margin-left:auto;position:relative}.mobile-nav-toggle{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 12px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--text);font-size:12px;font-weight:700;cursor:pointer}.mobile-nav-icon{font-size:16px;line-height:1}.mobile-nav-panel{position:absolute;right:0;top:50px;width:min(280px,calc(100vw - 28px));padding:10px;border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb,var(--panel) 94%, transparent);box-shadow:0 24px 70px rgba(0,0,0,.18);backdrop-filter:blur(18px);z-index:30}.mobile-nav-panel nav{display:grid;gap:4px}.mobile-nav-panel a{display:flex;align-items:center;min-height:44px;padding:10px 12px;border-radius:12px;color:var(--text);font-size:14px}.mobile-nav-panel a:hover{background:var(--panel2)}.status{display:inline-flex;align-items:center;gap:6px}.status-dot{width:6px;height:6px;border-radius:50%;background:var(--ok)}.project-card{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}.project-card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 28%,var(--line));box-shadow:0 24px 70px rgba(0,0,0,.16)}.project-card:hover .card-link span:last-child{transform:translate(2px,-2px)}.card-link span:last-child{display:inline-block;transition:transform .2s ease}
+@media (max-width:900px){.mobile-nav{display:block}.nav-links,.nav-actions{display:none}}
+@media (prefers-color-scheme:light){.mobile-nav-toggle{background:#fff;color:#111827;border-color:#cbd5e1}.mobile-nav-panel{background:rgba(255,255,255,.96);border-color:#d7dee7;box-shadow:0 24px 70px rgba(15,23,42,.12)}.mobile-nav-panel a{color:#111827}.mobile-nav-panel a:hover{background:#f1f5f9}.project-card:hover{box-shadow:0 24px 70px rgba(15,23,42,.10)}}

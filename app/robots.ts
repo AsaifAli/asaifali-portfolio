@@ -1,13 +1,2 @@
 import type { MetadataRoute } from "next";
-
-const SITE_URL = "https://asaifali-portfolio.vercel.app";
-
-export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-    },
-    sitemap: `${SITE_URL}/sitemap.xml`,
-  };
-}
+export default function robots(): MetadataRoute.Robots { return { rules: { userAgent: "*", allow: "/" }, sitemap: "https://asaifali-portfolio.vercel.app/sitemap.xml" }; }
