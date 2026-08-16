@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ScrollRestoration } from "@/components/ScrollRestoration";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body>
+        <ScrollRestoration />
         <div className="site-noise" aria-hidden="true" />
         <header className="site-header">
           <div className="shell nav-inner">
