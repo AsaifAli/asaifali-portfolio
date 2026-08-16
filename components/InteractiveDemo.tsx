@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-
-const GATEWAY_URL = process.env.NEXT_PUBLIC_LLM_GATEWAY_URL?.replace(/\/$/, "");
+import Link from "next/link";
+import { useAISession } from "./AISessionProvider";
 
 const providers = [
   { id: "openrouter", label: "OpenRouter", placeholder: "openai/gpt-oss-20b:free" },
@@ -12,143 +12,104 @@ const providers = [
 ] as const;
 
 type ProviderId = (typeof providers)[number]["id"];
-type Props = { project: string; title?: string; description?: string };
+type Props = {
+  project: string;
+  title?: string;
+  description?: string;
+  mode?: "manager" | "status";
+};
 
-export function InteractiveDemo({ project, title = "Try the interactive demo", description }: Props) {
+export function InteractiveDemo({
+  project,
+  title = "Try the interactive demo",
+  description,
+  mode = "manager",
+}: Props) {
+  const { token, provider: activeProvider, model: activeModel, hydrated, creating, error, createSession, revokeSession } = useAISession();
   const [provider, setProvider] = useState<ProviderId>("google");
   const [model, setModel] = useState("gemini-3.5-flash-lite");
   const [apiKey, setApiKey] = useState("");
-  const [token, setToken] = useState<string | null>(null);
-  const [status, setStatus] = useState<"idle" | "creating" | "ready" | "error">("idle");
-  const [error, setError] = useState("");
+  const selectedProvider = useMemo(() => providers.find((item) => item.id === provider) ?? providers[0], [provider]);
 
-  const selectedProvider = useMemo(
-    () => providers.find((item) => item.id === provider) ?? providers[0],
-    [provider],
-  );
-
-  async function createSession() {
-    if (!GATEWAY_URL) {
-      setStatus("error");
-      setError("Interactive demos are not configured yet.");
-      return;
-    }
-    if (!apiKey.trim() || !model.trim()) {
-      setStatus("error");
-      setError("Enter an API key and model ID to continue.");
-      return;
-    }
-    setStatus("creating");
-    setError("");
-    try {
-      const response = await fetch(`${GATEWAY_URL}/v1/demo/session`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ provider, model: model.trim(), api_key: apiKey, project }),
-      });
-      const payload = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(payload?.detail || payload?.error?.message || "Unable to create demo session.");
-      setToken(payload.access_token ?? null);
-      setStatus(payload.access_token ? "ready" : "error");
-      if (!payload.access_token) setError("Gateway did not return a session token.");
-    } catch (caught) {
-      setStatus("error");
-      setError(caught instanceof Error ? caught.message : "Unable to create demo session.");
-    }
-  }
-
-  async function revokeSession() {
-    if (!GATEWAY_URL || !token) return;
-    try {
-      await fetch(`${GATEWAY_URL}/v1/demo/session/revoke`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-    } finally {
-      setToken(null);
-      setApiKey("");
-      setStatus("idle");
-      setError("");
-    }
+  if (mode === "status") {
+    return (
+      <section className="demo-panel demo-session-status" aria-labelledby={`${project}-session-title`}>
+        <div className="demo-header">
+          <div>
+            <div className="section-kicker">Shared AI session</div>
+            <h3 id={`${project}-session-title`}>{token ? "Ready to try this project" : "Connect the portfolio AI session"}</h3>
+            <p className="demo-copy">
+              {token
+                ? `The portfolio session is active for ${activeProvider} / ${activeModel}. Projects reuse this session instead of asking for your provider key again.`
+                : "Set up the portfolio-level BYOK session once, then reuse it across the project pages."}
+            </p>
+          </div>
+          <span className={`demo-status ${token ? "demo-status-ready" : "demo-status-idle"}`}>
+            {token ? "Session active" : "No session"}
+          </span>
+        </div>
+        <div className="demo-actions">
+          <div className="demo-footnote">One temporary gateway session for the whole portfolio</div>
+          <div className="demo-actions-buttons">
+            {token ? <button className="btn btn-secondary" type="button" onClick={revokeSession}>End session</button> : <Link className="btn btn-primary" href="/#demo">Open AI session →</Link>}
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (
-    <section className="demo-panel" aria-labelledby={`${project}-demo-title`}>
+    <section className="demo-panel" id={project === "portfolio" ? undefined : `${project}-demo`} aria-labelledby={`${project}-demo-title`}>
       <div className="demo-header">
         <div>
           <div className="section-kicker">Interactive demo · BYOK</div>
           <h3 id={`${project}-demo-title`}>{title}</h3>
           <p className="demo-copy">
-            {description ?? "Bring your own provider key. The credential is used for a short-lived demo session and is not stored in the portfolio."}
+            {description ?? "Bring your own provider key once. The credential creates a short-lived portfolio session and is not stored by the portfolio."}
           </p>
         </div>
-        <span className={`demo-status demo-status-${status}`}>
-          {status === "ready" ? "Session ready" : status === "creating" ? "Connecting…" : "Ready to connect"}
-        </span>
+        {hydrated && <span className={`demo-status ${token ? "demo-status-ready" : creating ? "demo-status-creating" : "demo-status-idle"}`}>{token ? "Session active" : creating ? "Connecting…" : "Ready to connect"}</span>}
       </div>
 
-      <div className="demo-grid">
-        <div className="field">
-          <label htmlFor={`${project}-provider`}>Provider</label>
-          <select
-            id={`${project}-provider`}
-            value={provider}
-            onChange={(event) => {
-              const next = event.target.value as ProviderId;
-              setProvider(next);
-              const item = providers.find((candidate) => candidate.id === next);
-              if (item) setModel(item.placeholder);
-              setStatus("idle");
-              setError("");
-            }}
-          >
-            {providers.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}
-          </select>
+      {token ? (
+        <div className="shared-session-card">
+          <div>
+            <div className="shared-session-label">Portfolio AI session</div>
+            <strong>{activeProvider} · {activeModel}</strong>
+            <p>Active across the portfolio in this browser session. Your provider API key is not stored.</p>
+          </div>
+          <div className="demo-actions-buttons">
+            <button className="btn btn-secondary" type="button" onClick={revokeSession}>End session</button>
+            {project === "portfolio" && <Link className="btn btn-primary" href="#work">Choose a project →</Link>}
+          </div>
         </div>
-
-        <div className="field">
-          <label htmlFor={`${project}-model`}>Model ID</label>
-          <input
-            id={`${project}-model`}
-            value={model}
-            onChange={(event) => setModel(event.target.value)}
-            placeholder={selectedProvider.placeholder}
-            spellCheck={false}
-          />
-        </div>
-
-        <div className="field demo-key-field">
-          <label htmlFor={`${project}-api-key`}>Provider API key</label>
-          <input
-            id={`${project}-api-key`}
-            type="password"
-            value={apiKey}
-            onChange={(event) => setApiKey(event.target.value)}
-            placeholder={`Paste your ${selectedProvider.label} key`}
-            autoComplete="off"
-            spellCheck={false}
-          />
-          <span className="field-hint">Used once to create the temporary gateway session. It is not stored by this portfolio.</span>
-        </div>
-      </div>
-
-      {error && <div className="notice demo-error" role="alert">{error}</div>}
-
-      <div className="demo-actions">
-        <div className="demo-footnote">Short-lived session · provider key stays with the request</div>
-        {status === "ready" ? (
-          <button className="btn btn-secondary" type="button" onClick={revokeSession}>End session</button>
-        ) : (
-          <button className="btn btn-primary" type="button" onClick={createSession} disabled={status === "creating"}>
-            {status === "creating" ? "Creating secure session…" : "Start interactive demo →"}
-          </button>
-        )}
-      </div>
-
-      {status === "ready" && (
-        <div className="notice demo-ready">
-          Session established for <strong>{provider}</strong> / <strong>{model}</strong>. The gateway connection is ready for the project-specific demo action.
-        </div>
+      ) : (
+        <>
+          <div className="demo-grid">
+            <div className="field">
+              <label htmlFor={`${project}-provider`}>Provider</label>
+              <select id={`${project}-provider`} value={provider} onChange={(event) => { const next = event.target.value as ProviderId; setProvider(next); const item = providers.find((candidate) => candidate.id === next); if (item) setModel(item.placeholder); }}>
+                {providers.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}
+              </select>
+            </div>
+            <div className="field">
+              <label htmlFor={`${project}-model`}>Model ID</label>
+              <input id={`${project}-model`} value={model} onChange={(event) => setModel(event.target.value)} placeholder={selectedProvider.placeholder} spellCheck={false} />
+            </div>
+            <div className="field demo-key-field">
+              <label htmlFor={`${project}-api-key`}>Provider API key</label>
+              <input id={`${project}-api-key`} type="password" value={apiKey} onChange={(event) => setApiKey(event.target.value)} placeholder={`Paste your ${selectedProvider.label} key`} autoComplete="off" spellCheck={false} />
+              <span className="field-hint">Used once to create the temporary portfolio session. It is not stored by the portfolio.</span>
+            </div>
+          </div>
+          {error && <div className="notice demo-error" role="alert">{error}</div>}
+          <div className="demo-actions">
+            <div className="demo-footnote">One session · reusable across project pages · provider key never stored</div>
+            <button className="btn btn-primary" type="button" onClick={() => createSession({ provider, model, apiKey })} disabled={creating}>
+              {creating ? "Creating secure session…" : "Start portfolio AI session →"}
+            </button>
+          </div>
+        </>
       )}
     </section>
   );
