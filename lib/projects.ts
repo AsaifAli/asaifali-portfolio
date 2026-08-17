@@ -14,6 +14,7 @@ export type Project = {
   architecture: string[];
   decisions: string[];
   reliability: string[];
+  liveUrl?: string;
 };
 
 export const projects: Project[] = [
@@ -33,6 +34,7 @@ export const projects: Project[] = [
     architecture: ["Upload / source workspace", "Repository scanner + code intelligence", "Agentic planning + transformation", "Knowledge / dependency analysis", "Post-migration validation + repair", "Release gate + reports"],
     decisions: ["Keep deterministic validation outside the LLM", "Make migration state observable and resumable", "Treat repair as a re-validation loop", "Separate provider/model configuration from workflow logic"],
     reliability: ["Quality gates", "Semantic verification", "Security/provenance checks", "CI regression tests", "Persisted migration status"],
+    liveUrl: "https://ai-code-modernization-ui.onrender.com",
   },
   {
     slug: "evidenceflow",
@@ -67,6 +69,7 @@ export const projects: Project[] = [
     architecture: ["Document ingestion", "LLM extraction", "Pydantic validation", "Deterministic calculations", "Comparison + anomaly analysis", "Human-readable result"],
     decisions: ["Keep arithmetic deterministic", "Validate before scoring", "Preserve raw extraction for auditability", "Make provider choice independent of business rules"],
     reliability: ["Typed schemas", "Deterministic scoring", "Anomaly detection", "Validation failures surfaced explicitly"],
+    liveUrl: "https://quotation-analyzer-9m4i.onrender.com",
   },
   {
     slug: "flowpilot",
@@ -84,6 +87,7 @@ export const projects: Project[] = [
     architecture: ["API command center", "Workflow definition", "Queue + worker execution", "Persistence + state transitions", "Approval / validation", "Result + observability"],
     decisions: ["Use async jobs for long-running AI work", "Persist state outside process memory", "Keep human approval explicit", "Treat provider failures as recoverable states"],
     reliability: ["Retryable workers", "Persisted state", "Approval gates", "Request correlation", "Health/readiness checks"],
+    liveUrl: "https://ai-automation-ui-ac2c.onrender.com",
   },
   {
     slug: "webqa-intelligence",
@@ -101,9 +105,21 @@ export const projects: Project[] = [
     architecture: ["Browser session", "DOM + interaction discovery", "Browser health signals", "Risk scoring", "Evidence-grounded test generation", "Regression comparison"],
     decisions: ["Use Playwright for runtime truth", "Capture evidence before generating tests", "Separate crawler telemetry from LLM reasoning", "Treat browser failures as first-class signals"],
     reliability: ["Browser health telemetry", "Evidence-backed tests", "Regression comparison", "Bounded crawl behavior"],
+    liveUrl: "https://web-crawler-agent.onrender.com",
   },
 ];
 
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);
+}
+
+export function getProjectLiveUrl(project: Project): string {
+  if (project.liveUrl) return project.liveUrl;
+  const envKey = {
+    legacylens: "NEXT_PUBLIC_DEMO_URL_LEGACYLENS",
+    evidenceflow: "NEXT_PUBLIC_DEMO_URL_EVIDENCEFLOW",
+    flowpilot: "NEXT_PUBLIC_DEMO_URL_FLOWPILOT",
+    "webqa-intelligence": "NEXT_PUBLIC_DEMO_URL_WEBQA_INTELLIGENCE",
+  }[project.slug] as string | undefined;
+  return envKey ? (process.env[envKey] ?? "").trim().replace(/\/$/, "") : "";
 }

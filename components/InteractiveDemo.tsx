@@ -17,19 +17,34 @@ type Props = {
   title?: string;
   description?: string;
   mode?: "manager" | "status";
+  liveUrl?: string;
 };
+
+const HANDOFF_PARAM = "portfolio_llm_session";
+
+function buildLaunchUrl(liveUrl: string, token: string) {
+  const target = new URL(liveUrl);
+  target.searchParams.set(HANDOFF_PARAM, token);
+  return target.toString();
+}
 
 export function InteractiveDemo({
   project,
   title = "Try the interactive demo",
   description,
   mode = "manager",
+  liveUrl = "",
 }: Props) {
   const { token, provider: activeProvider, model: activeModel, hydrated, creating, error, createSession, revokeSession } = useAISession();
   const [provider, setProvider] = useState<ProviderId>("google");
   const [model, setModel] = useState("gemini-3.5-flash-lite");
   const [apiKey, setApiKey] = useState("");
   const selectedProvider = useMemo(() => providers.find((item) => item.id === provider) ?? providers[0], [provider]);
+
+  const launchDemo = () => {
+    if (!token || !liveUrl) return;
+    window.open(buildLaunchUrl(liveUrl, token), "_blank", "noopener,noreferrer");
+  };
 
   if (mode === "status") {
     return (
@@ -40,7 +55,7 @@ export function InteractiveDemo({
             <h3 id={`${project}-session-title`}>{token ? "Ready to try this project" : "Connect the portfolio AI session"}</h3>
             <p className="demo-copy">
               {token
-                ? `The portfolio session is active for ${activeProvider} / ${activeModel}. Projects reuse this session instead of asking for your provider key again.`
+                ? `The portfolio session is active for ${activeProvider} / ${activeModel}. Launching the demo passes this temporary gateway session into the project.`
                 : "Set up the portfolio-level BYOK session once, then reuse it across the project pages."}
             </p>
           </div>
@@ -49,8 +64,11 @@ export function InteractiveDemo({
           </span>
         </div>
         <div className="demo-actions">
-          <div className="demo-footnote">One temporary gateway session for the whole portfolio</div>
+          <div className="demo-footnote">
+            {liveUrl ? "Temporary gateway session · reusable across portfolio projects" : "Demo deployment URL is not configured for this project yet"}
+          </div>
           <div className="demo-actions-buttons">
+            {token && liveUrl && <button className="btn btn-primary" type="button" onClick={launchDemo}>Launch live demo ↗</button>}
             {token ? <button className="btn btn-secondary" type="button" onClick={revokeSession}>End session</button> : <Link className="btn btn-primary" href="/#demo">Open AI session →</Link>}
           </div>
         </div>
