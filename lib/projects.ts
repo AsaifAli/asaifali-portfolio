@@ -52,6 +52,7 @@ export const projects: Project[] = [
     architecture: ["Query understanding + routing", "Dense + lexical retrieval", "RRF fusion + cross-encoder reranking", "Evidence synthesis", "Citation / claim verification", "Final guarded response"],
     decisions: ["Preserve evidence IDs through the graph", "Keep tool execution provider-agnostic", "Use deterministic citation checks", "Separate document summaries from chunk analysis"],
     reliability: ["Evidence-grounded synthesis", "Citation verification", "Fail-closed behavior", "Hybrid retrieval", "Regression diagnostics"],
+    liveUrl: "https://langgraph-rag-hdkn.onrender.com",
   },
   {
     slug: "quotesense",
