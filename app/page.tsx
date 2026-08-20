@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { ProjectCard } from "@/components/ProjectCard";
+import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { getProjects } from "@/lib/portfolio-data";
-import { InteractiveDemo } from "@/components/InteractiveDemo";
 
 const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "";
 
@@ -87,9 +86,10 @@ export default async function Home() {
           <div className="work-tools-head">
             <div>
               <div className="section-kicker">What I work with</div>
-              <h3>A practical stack, chosen for the problem.</h3>
+              <h3>The practical stack</h3>
+              <p>I keep the toolkit flexible. The common thread is Python, modern LLM tooling, retrieval, APIs, and cloud infrastructure.</p>
             </div>
-            <p>I keep the toolkit flexible. The common thread is Python, modern LLM tooling, retrieval, APIs, and cloud infrastructure.</p>
+            {/* <p>I keep the toolkit flexible. The common thread is Python, modern LLM tooling, retrieval, APIs, and cloud infrastructure.</p> */}
           </div>
           <div className="toolkit-lines">
             <div><span>AI &amp; LLMs</span><strong>Generative AI · Agentic AI · OpenAI API · Gemini API</strong></div>
@@ -106,21 +106,19 @@ export default async function Home() {
           <div><div className="section-kicker">Selected personal builds</div><h2>A few things I’ve built outside the day job.</h2></div>
           <p className="section-intro">These are the projects where I give myself room to explore a problem, test an idea, and take it far enough to become a real working system.</p>
         </div>
-        <div className="project-list featured-projects">{featured.map((project, index) => <ProjectCard key={project.slug} project={project} featured={index === 0} />)}</div>
-        <div className="work-more-intro"><span>More personal work</span><span>More experiments and systems live on the project pages.</span></div>
-        <div className="project-list secondary-projects">{remaining.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
+        <ProjectCarousel projects={featured.concat(remaining)} />
       </section>
 
-      <section className="shell section playground-section" id="playground">
-        <div className="playground-wrap playground-light">
+      {/* <section className="shell section playground-section" id="playground">
+        <div className="playground-wrap playground-light hands-on-lite">
           <div>
             <div className="section-kicker">A hands-on extra</div>
-            <h2>Want to see the AI side in action?</h2>
-            <p>An optional playground for anyone who wants to go a little deeper into the systems behind the work.</p>
+            <h2>Want to go a little deeper?</h2>
+            <p>The interactive demos now live with the individual projects, where each one has the context, walkthrough, and project-specific demo together.</p>
           </div>
-          <InteractiveDemo project="portfolio" title="Open the AI playground" description="Try the interactive side of the portfolio when you want to go deeper." />
+          <Link className="btn btn-secondary" href="/projects/evidenceflow">Explore a project ↗</Link>
         </div>
-      </section>
+      </section> */}
 
       <section id="contact" className="shell section contact-section contact-refined">
         <div className="contact-intro">

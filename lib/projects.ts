@@ -15,12 +15,13 @@ export type Project = {
   decisions: string[];
   reliability: string[];
   liveUrl?: string;
+  star?: { situation: string; task: string; action: string[]; result: string[] };
 };
 
 export const projects: Project[] = [
   {
     slug: "legacylens",
-    number: "02",
+    number: "01",
     name: "LegacyLens",
     eyebrow: "Agentic software modernization",
     short: "Analyze legacy repositories, plan migrations, transform code, and validate behavior with automated quality gates.",
@@ -35,10 +36,23 @@ export const projects: Project[] = [
     decisions: ["Keep deterministic validation outside the LLM", "Make migration state observable and resumable", "Treat repair as a re-validation loop", "Separate provider/model configuration from workflow logic"],
     reliability: ["Quality gates", "Semantic verification", "Security/provenance checks", "CI regression tests", "Persisted migration status"],
     liveUrl: "https://ai-code-modernization-ui.onrender.com",
+    star: {
+      situation: "Legacy migration is difficult to trust when repositories contain many dependencies, inconsistent patterns, and behavior that must survive translation.",
+      task: "Build a modernization workflow that could understand a repository before changing it, plan the migration, transform code with context, and prove whether the result was ready to release.",
+      action: [
+        "Used AST/CTags analysis and dependency intelligence to build deterministic repository context before generation.",
+        "Stored analysis artifacts in Qdrant and retrieved bounded context instead of sending the whole repository to the model.",
+        "Separated planning, context-grounded conversion, post-migration QA, repair, and release gating into explicit workflow stages."
+      ],
+      result: [
+        "Turned modernization into an observable engineering workflow rather than a one-shot LLM translation.",
+        "Added structural and execution-aware validation plus a release gate so generated code could be inspected before packaging."
+      ]
+    },
   },
   {
     slug: "evidenceflow",
-    number: "01",
+    number: "02",
     name: "EvidenceFlow",
     eyebrow: "Verified RAG & research",
     short: "Hybrid retrieval, reranking, web research, evidence verification, and fail-closed answer generation.",
@@ -53,10 +67,23 @@ export const projects: Project[] = [
     decisions: ["Preserve evidence IDs through the graph", "Keep tool execution provider-agnostic", "Use deterministic citation checks", "Separate document summaries from chunk analysis"],
     reliability: ["Evidence-grounded synthesis", "Citation verification", "Fail-closed behavior", "Hybrid retrieval", "Regression diagnostics"],
     liveUrl: "https://langgraph-rag-hdkn.onrender.com",
+    star: {
+      situation: "RAG systems can retrieve plausible text and still produce answers that are unsupported, overconfident, or weakly cited.",
+      task: "Build a research assistant where retrieval, evidence collection, citation verification, and answer policy are explicit parts of the system.",
+      action: [
+        "Added agentic routing so a query can use the knowledge base, web research, both, or neither.",
+        "Combined dense and sparse retrieval with reciprocal-rank fusion and cross-encoder reranking.",
+        "Kept a turn-scoped evidence registry, verified citations against the exact evidence set, and added fail-closed behavior when support is insufficient."
+      ],
+      result: [
+        "Answers can be grounded against a closed evidence set instead of trusting model confidence.",
+        "Conversation state, citations, retrieval progress, and evidence become inspectable parts of the research workflow."
+      ]
+    },
   },
   {
     slug: "quotesense",
-    number: "04",
+    number: "03",
     name: "QuoteSense",
     eyebrow: "Procurement intelligence",
     short: "Turn messy quotations into validated, comparable procurement intelligence with deterministic scoring and review.",
@@ -71,10 +98,23 @@ export const projects: Project[] = [
     decisions: ["Keep arithmetic deterministic", "Validate before scoring", "Preserve raw extraction for auditability", "Make provider choice independent of business rules"],
     reliability: ["Typed schemas", "Deterministic scoring", "Anomaly detection", "Validation failures surfaced explicitly"],
     liveUrl: "https://quotation-analyzer-9m4i.onrender.com",
+    star: {
+      situation: "Supplier quotations arrive in inconsistent formats, with missing fields and commercial edge cases that make free-form LLM ranking risky.",
+      task: "Create a controlled quotation pipeline that separates probabilistic extraction from deterministic procurement decisions.",
+      action: [
+        "Normalized PDF, DOCX, TXT, and XLSX content into typed quotation structures.",
+        "Validated extracted data before calculating completeness, cost scores, comparisons, and anomalies in Python.",
+        "Kept evidence snippets/pages/sheets alongside extracted fields so recommendations could be reviewed instead of treated as black-box output."
+      ],
+      result: [
+        "Produced explainable quotation comparisons where arithmetic remains deterministic and qualitative reasoning stays grounded in validated data.",
+        "Shipped the workflow as a Streamlit dashboard with a FastAPI service and deployment-friendly container stack."
+      ]
+    },
   },
   {
     slug: "flowpilot",
-    number: "03",
+    number: "04",
     name: "FlowPilot",
     eyebrow: "Agentic automation",
     short: "Asynchronous AI workflows with approvals, evidence, persistence, and observability.",
@@ -89,6 +129,19 @@ export const projects: Project[] = [
     decisions: ["Use async jobs for long-running AI work", "Persist state outside process memory", "Keep human approval explicit", "Treat provider failures as recoverable states"],
     reliability: ["Retryable workers", "Persisted state", "Approval gates", "Request correlation", "Health/readiness checks"],
     liveUrl: "https://ai-automation-ui-ac2c.onrender.com",
+    star: {
+      situation: "AI automation becomes difficult to operate when long-running work, retries, approvals, and state live inside fragile synchronous requests.",
+      task: "Build a production-minded AI automation control plane that treats agents as durable workflows instead of isolated prompts.",
+      action: [
+        "Separated API orchestration from execution with FastAPI, Redis/RQ workers, PostgreSQL persistence, and LangGraph workflows.",
+        "Added human approval boundaries, evidence and validation for external-impact workflows, plus scheduled automation.",
+        "Instrumented the system with Prometheus/Grafana metrics and OpenTelemetry/Jaeger traces and added CI evaluation coverage."
+      ],
+      result: [
+        "Created an operations-oriented architecture for content, competitor, outreach, and KPI automation patterns.",
+        "Made workflow progress, audit state, approvals, retries, and observability first-class rather than hidden behind the LLM call."
+      ]
+    },
   },
   {
     slug: "webqa-intelligence",
@@ -107,6 +160,19 @@ export const projects: Project[] = [
     decisions: ["Use Playwright for runtime truth", "Capture evidence before generating tests", "Separate crawler telemetry from LLM reasoning", "Treat browser failures as first-class signals"],
     reliability: ["Browser health telemetry", "Evidence-backed tests", "Regression comparison", "Bounded crawl behavior"],
     liveUrl: "https://web-crawler-agent.onrender.com",
+    star: {
+      situation: "Static crawlers miss the dynamic interactions, delayed content, browser errors, and real user-flow risk that matter in QA.",
+      task: "Build a browser-intelligence pipeline that turns observed web behavior into evidence-grounded QA analysis without accidentally performing destructive actions.",
+      action: [
+        "Used Playwright to discover same-domain pages, forms, fields, links, controls, and browser health signals.",
+        "Generated interaction candidates from observed evidence and used that evidence for risk scoring and prioritized test generation.",
+        "Added console/network failure signals, regression baselines, and exports while deliberately avoiding arbitrary automatic clicks or form submissions."
+      ],
+      result: [
+        "Produced a safer, evidence-first QA workflow that can prioritize meaningful test coverage from real browser observations.",
+        "Kept the production pipeline focused on structured DOM/runtime truth rather than screenshot-only interpretation."
+      ]
+    },
   },
 ];
 
