@@ -13,7 +13,7 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
       <p className="project-lede">{project.short}</p>
       <div className="project-story-grid">
         <div>
-          <span className="project-story-label">The problem</span>
+          <span className="project-story-label">The Current Scenario</span>
           <p>{project.problem}</p>
         </div>
         <div>

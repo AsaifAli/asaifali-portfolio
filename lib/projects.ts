@@ -20,7 +20,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "legacylens",
-    number: "01",
+    number: "02",
     name: "LegacyLens",
     eyebrow: "Agentic software modernization",
     short: "Analyze legacy repositories, plan migrations, transform code, and validate behavior with automated quality gates.",
@@ -38,7 +38,7 @@ export const projects: Project[] = [
   },
   {
     slug: "evidenceflow",
-    number: "02",
+    number: "01",
     name: "EvidenceFlow",
     eyebrow: "Verified RAG & research",
     short: "Hybrid retrieval, reranking, web research, evidence verification, and fail-closed answer generation.",
@@ -56,7 +56,7 @@ export const projects: Project[] = [
   },
   {
     slug: "quotesense",
-    number: "03",
+    number: "04",
     name: "QuoteSense",
     eyebrow: "Procurement intelligence",
     short: "Turn messy quotations into validated, comparable procurement intelligence with deterministic scoring and review.",
@@ -74,7 +74,7 @@ export const projects: Project[] = [
   },
   {
     slug: "flowpilot",
-    number: "04",
+    number: "03",
     name: "FlowPilot",
     eyebrow: "Agentic automation",
     short: "Asynchronous AI workflows with approvals, evidence, persistence, and observability.",

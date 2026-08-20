@@ -24,7 +24,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="hero-personal-note hero-human-note">
-            <p className="hero-note-kicker">Based in India</p>
+            <p className="hero-note-kicker">Based in Chandigarh, India</p>
             <p>I enjoy the space between experimentation and dependable software — trying things, learning fast, and making the next version better.</p>
             <div className="hero-note-links">
               <a href="https://www.linkedin.com/in/sk-asaif-ali-134873243" target="_blank" rel="noreferrer">LinkedIn ↗</a>
