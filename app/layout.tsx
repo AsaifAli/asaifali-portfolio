@@ -35,8 +35,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <header className="site-header"><div className="shell nav-inner">
       <Link href="/" className="brand" aria-label="Asaif Ali home">ASAIF ALI<span className="brand-dot">.</span></Link>
       <nav className="nav-links" aria-label="Primary navigation">{nav.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}</nav>
-      <div className="nav-actions">
-              <AISessionBadge /><a href="https://github.com/AsaifAli" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/sk-asaif-ali-134873243" target="_blank" rel="noreferrer">LinkedIn ↗</a></div>
+      <div className="nav-actions"><AISessionBadge /><Link className="header-connect" href="/#contact">Let’s connect</Link></div>
       <MobileNav nav={nav} />
     </div></header>
     {children}
