@@ -117,33 +117,10 @@ export default async function Home() {
           <h2>Interested in working together?</h2>
           <p>For a role, collaboration, or just a technical conversation, I’d be happy to hear from you.</p>
         </div>
-        <div className="contact-links-panel">
-          <div className="contact-links-label">The easiest ways to reach me</div>
-          <div className="contact-link-list">
-            {CONTACT_EMAIL && (
-              <a className="contact-link-card" href={`mailto:${CONTACT_EMAIL}`}>
-                <span className="contact-link-copy">
-                  <small>Email</small>
-                  <strong>{CONTACT_EMAIL}</strong>
-                </span>
-                <span className="contact-link-arrow" aria-hidden="true">↗</span>
-              </a>
-            )}
-            <a className="contact-link-card" href="https://www.linkedin.com/in/sk-asaif-ali-134873243" target="_blank" rel="noreferrer">
-              <span className="contact-link-copy">
-                <small>LinkedIn</small>
-                <strong>Connect with me on LinkedIn</strong>
-              </span>
-              <span className="contact-link-arrow" aria-hidden="true">↗</span>
-            </a>
-            <a className="contact-link-card" href="https://github.com/AsaifAli" target="_blank" rel="noreferrer">
-              <span className="contact-link-copy">
-                <small>GitHub</small>
-                <strong>See what I’m building</strong>
-              </span>
-              <span className="contact-link-arrow" aria-hidden="true">↗</span>
-            </a>
-          </div>
+        <div className="contact-direct">
+          {CONTACT_EMAIL && <a className="direct-contact" href={`mailto:${CONTACT_EMAIL}`}>Email me<span>↗</span></a>}
+          <a className="direct-contact" href="https://www.linkedin.com/in/sk-asaif-ali-134873243" target="_blank" rel="noreferrer">Connect on LinkedIn<span>↗</span></a>
+          <a className="direct-contact" href="https://github.com/AsaifAli" target="_blank" rel="noreferrer">See my GitHub<span>↗</span></a>
         </div>
       </section>
     </main>
