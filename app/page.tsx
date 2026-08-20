@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ProjectCard } from "@/components/ProjectCard";
 import { getProjects } from "@/lib/portfolio-data";
-import { ContactForm } from "@/components/ContactForm";
 import { InteractiveDemo } from "@/components/InteractiveDemo";
 
 const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "";
@@ -117,14 +116,19 @@ export default async function Home() {
           <div className="section-kicker">Get in touch</div>
           <h2>Interested in working together?</h2>
           <p>For a role, collaboration, or just a technical conversation, I’d be happy to hear from you.</p>
-          <div className="contact-direct">
-            {CONTACT_EMAIL && <a className="direct-contact" href={`mailto:${CONTACT_EMAIL}`}>Email me<span>↗</span></a>}
-            <a className="direct-contact" href="https://www.linkedin.com/in/sk-asaif-ali-134873243" target="_blank" rel="noreferrer">LinkedIn<span>↗</span></a>
-          </div>
-          <p className="contact-hint">Prefer a message? Use the form and it will be sent to the portfolio contact service.</p>
         </div>
-        <div className="contact-form-wrap">
-          <ContactForm />
+        <div className="contact-direct contact-direct-stack" aria-label="Direct contact links">
+          {CONTACT_EMAIL && (
+            <a className="direct-contact contact-link-row" href={`mailto:${CONTACT_EMAIL}`}>
+              <span><small>EMAIL</small><strong>Email me</strong></span><span aria-hidden="true">↗</span>
+            </a>
+          )}
+          <a className="direct-contact contact-link-row" href="https://www.linkedin.com/in/sk-asaif-ali-134873243" target="_blank" rel="noreferrer">
+            <span><small>LINKEDIN</small><strong>Connect with me on LinkedIn</strong></span><span aria-hidden="true">↗</span>
+          </a>
+          <a className="direct-contact contact-link-row" href="https://github.com/AsaifAli" target="_blank" rel="noreferrer">
+            <span><small>GITHUB</small><strong>See what I’m building</strong></span><span aria-hidden="true">↗</span>
+          </a>
         </div>
       </section>
     </main>
