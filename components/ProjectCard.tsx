@@ -10,7 +10,7 @@ export function ProjectCard({ project }: { project: Project }) {
       <p>{project.short}</p>
       <div className="tags" aria-label="Technologies">{project.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}</div>
       <div className="project-card-footer">
-        <Link className="card-link" href={`/projects/${project.slug}`} aria-label={`Read the ${project.name} case study`}><span>Read case study</span><span aria-hidden="true">↗</span></Link>
+        <Link className="card-link" href={`/projects/${project.slug}`} aria-label={`View the ${project.name} project`}><span>View project</span><span aria-hidden="true">↗</span></Link>
         <a className="card-link secondary-card-link" href={project.github} target="_blank" rel="noreferrer"><span>Source</span><span aria-hidden="true">↗</span></a>
       </div>
     </article>

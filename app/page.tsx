@@ -7,7 +7,8 @@ const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "";
 
 export default async function Home() {
   const projects = await getProjects();
-  const featured = projects.filter((project) => ["legacylens", "evidenceflow", "flowpilot"].includes(project.slug));
+  const featuredOrder = ["evidenceflow", "legacylens", "flowpilot"];
+  const featured = featuredOrder.map((slug) => projects.find((project) => project.slug === slug)).filter(Boolean) as typeof projects;
   const remaining = projects.filter((project) => !featured.some((item) => item.slug === project.slug));
 
   return (
@@ -15,10 +16,8 @@ export default async function Home() {
       <section className="shell hero-personal hero-refined">
         <div className="hero-refined-grid hero-personal-simple">
           <div className="hero-refined-copy">
-            <div className="eyebrow">AI / MACHINE LEARNING</div>
             <h1>Hi, I’m <span className="name-accent">Asaif.</span></h1>
             <p className="hero-lede">I build AI systems, explore difficult problems, and turn good ideas into software people can actually use.</p>
-            <p className="hero-support">My work sits around Generative AI, Agentic AI, retrieval, automation, and AI-assisted software engineering.</p>
             <div className="hero-actions">
               <Link className="btn btn-primary" href="#about">A little about me</Link>
               <Link className="text-link" href="#work">See my work <span aria-hidden="true">↗</span></Link>
@@ -64,9 +63,10 @@ export default async function Home() {
           <div className="timeline-line" aria-hidden="true" />
           <article className="timeline-item">
             <div className="timeline-dot" aria-hidden="true" />
-            <div className="timeline-period">2024 — NOW</div>
+            <div className="timeline-period">2024 — PRESENT</div>
             <div className="timeline-main">
               <h3>Software Engineer · AI/ML</h3>
+              <div className="experience-company">BEBO Technologies Pvt Ltd</div>
               <p>I work across Agentic RAG, LLM automation, multi-agent engineering workflows, application modernization, retrieval systems, and AI-assisted software engineering.</p>
               <div className="experience-focus-grid">
                 <div><span>01</span><strong>AI systems</strong><p>Building retrieval, agent, and LLM workflows around real application needs.</p></div>
@@ -91,7 +91,6 @@ export default async function Home() {
           <div><span>Retrieval &amp; search</span><strong>Qdrant · Hybrid search · RRF · Reranking · Tavily</strong></div>
           <div><span>Backend &amp; data</span><strong>Python · FastAPI · REST APIs · SQL</strong></div>
           <div><span>Infrastructure</span><strong>Docker · Redis · PostgreSQL · Supabase · Vercel · Render</strong></div>
-          <div><span>Quality</span><strong>Pydantic · CI · Evaluation · Regression tests · Observability</strong></div>
         </div>
       </section>
 
@@ -111,9 +110,9 @@ export default async function Home() {
           <div>
             <div className="section-kicker">A hands-on extra</div>
             <h2>Want to see the AI side in action?</h2>
-            <p>There’s an optional shared playground for the projects. It’s here for people who want to go deeper; the portfolio itself stays focused on me and the work.</p>
+            <p>An optional playground for anyone who wants to go a little deeper into the systems behind the work.</p>
           </div>
-          <InteractiveDemo project="portfolio" title="Open the AI playground" description="Bring your own provider key to create a short-lived inference session. The portfolio never stores the provider credential." />
+          <InteractiveDemo project="portfolio" title="Open the AI playground" description="Try the interactive side of the portfolio when you want to go deeper." />
         </div>
       </section>
 
