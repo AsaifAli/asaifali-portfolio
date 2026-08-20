@@ -22,6 +22,18 @@ type Props = {
 
 const HANDOFF_PARAM = "portfolio_llm_session";
 
+const PROJECT_LIVE_URLS: Record<string, string> = {
+  legacylens: "https://ai-code-modernization-ui.onrender.com",
+  evidenceflow: "https://langgraph-rag-hdkn.onrender.com",
+  quotesense: "https://quotation-analyzer-9m4i.onrender.com",
+  flowpilot: "https://ai-automation-ui-ac2c.onrender.com",
+  webqa_intelligence: "https://web-crawler-agent.onrender.com",
+};
+
+function resolveLiveUrl(project: string, liveUrl?: string) {
+  return liveUrl?.trim() || PROJECT_LIVE_URLS[project.toLowerCase()] || "";
+}
+
 function buildLaunchUrl(liveUrl: string, token: string) {
   const target = new URL(liveUrl);
   target.searchParams.set(HANDOFF_PARAM, token);
@@ -35,15 +47,29 @@ export function InteractiveDemo({
   mode = "manager",
   liveUrl = "",
 }: Props) {
-  const { token, provider: activeProvider, model: activeModel, hydrated, creating, error, createSession, revokeSession } = useAISession();
+  const {
+    token,
+    provider: activeProvider,
+    model: activeModel,
+    hydrated,
+    creating,
+    error,
+    createSession,
+    revokeSession,
+  } = useAISession();
+
   const [provider, setProvider] = useState<ProviderId>("google");
   const [model, setModel] = useState("gemini-3.5-flash-lite");
   const [apiKey, setApiKey] = useState("");
-  const selectedProvider = useMemo(() => providers.find((item) => item.id === provider) ?? providers[0], [provider]);
+  const selectedProvider = useMemo(
+    () => providers.find((item) => item.id === provider) ?? providers[0],
+    [provider],
+  );
+  const resolvedLiveUrl = resolveLiveUrl(project, liveUrl);
 
   const launchDemo = () => {
-    if (!token || !liveUrl) return;
-    window.open(buildLaunchUrl(liveUrl, token), "_blank", "noopener,noreferrer");
+    if (!token || !resolvedLiveUrl) return;
+    window.open(buildLaunchUrl(resolvedLiveUrl, token), "_blank", "noopener,noreferrer");
   };
 
   if (mode === "status") {
@@ -51,43 +77,63 @@ export function InteractiveDemo({
       <section className="demo-panel demo-session-status" aria-labelledby={`${project}-session-title`}>
         <div className="demo-header">
           <div>
-            <div className="section-kicker">Shared AI session</div>
-            <h3 id={`${project}-session-title`}>{token ? "Ready to try this project" : "Connect the portfolio AI session"}</h3>
+            <div className="section-kicker">Interactive demo · BYOK</div>
+            <h3 id={`${project}-session-title`}>
+              {token ? `Try ${project === "portfolio" ? "this project" : "this project"} live` : "Connect your AI session"}
+            </h3>
             <p className="demo-copy">
               {token
-                ? `The portfolio session is active for ${activeProvider} / ${activeModel}. Launching the demo passes this temporary gateway session into the project.`
-                : "Set up the portfolio-level BYOK session once, then reuse it across the project pages."}
+                ? `Your temporary ${activeProvider} / ${activeModel} session is ready. Open the live project below to use it.`
+                : "Bring your own provider key to create a short-lived session for this project. The portfolio does not store the credential."}
             </p>
           </div>
           <span className={`demo-status ${token ? "demo-status-ready" : "demo-status-idle"}`}>
             {token ? "Session active" : "No session"}
           </span>
         </div>
-        <div className="demo-actions">
-          <div className="demo-footnote">
-            {liveUrl ? "Temporary gateway session · reusable across portfolio projects" : "Demo deployment URL is not configured for this project yet"}
-          </div>
-          <div className="demo-actions-buttons demo-session-buttons">
-            {token && liveUrl && (
-              <button className="btn btn-primary" type="button" onClick={launchDemo}>
+
+        {token ? (
+          <div className="shared-session-card shared-session-card-active">
+            <div className="shared-session-copy">
+              <div className="shared-session-label">Portfolio AI session</div>
+              <strong>{activeProvider} · {activeModel}</strong>
+              <p>Active in this browser session. Your provider API key is not stored by the portfolio.</p>
+            </div>
+            <div className="demo-actions-buttons demo-session-buttons demo-session-buttons-active">
+              <button
+                className="btn btn-primary demo-launch-btn"
+                type="button"
+                onClick={launchDemo}
+                disabled={!resolvedLiveUrl}
+                title={resolvedLiveUrl ? "Open the live project with this session" : "Demo deployment URL is not configured"}
+              >
                 Open project ↗
               </button>
-            )}
-            {token ? (
-              <button className="btn btn-secondary" type="button" onClick={revokeSession}>
+              <button className="btn btn-session-end" type="button" onClick={() => void revokeSession()}>
                 End session
               </button>
-            ) : (
-              <Link className="btn btn-primary" href="/#demo">Open AI session →</Link>
-            )}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="demo-actions">
+            <div className="demo-footnote">
+              One session · reusable across project pages · provider key never stored
+            </div>
+            <Link className="btn btn-secondary" href="/#playground">
+              Configure session →
+            </Link>
+          </div>
+        )}
       </section>
     );
   }
 
   return (
-    <section className="demo-panel" id={project === "portfolio" ? undefined : `${project}-demo`} aria-labelledby={`${project}-demo-title`}>
+    <section
+      className="demo-panel"
+      id={project === "portfolio" ? undefined : `${project}-demo`}
+      aria-labelledby={`${project}-demo-title`}
+    >
       <div className="demo-header">
         <div>
           <div className="section-kicker">Interactive demo · BYOK</div>
@@ -96,19 +142,34 @@ export function InteractiveDemo({
             {description ?? "Bring your own provider key once. The credential creates a short-lived portfolio session and is not stored by the portfolio."}
           </p>
         </div>
-        {hydrated && <span className={`demo-status ${token ? "demo-status-ready" : creating ? "demo-status-creating" : "demo-status-idle"}`}>{token ? "Session active" : creating ? "Connecting…" : "Ready to connect"}</span>}
+        {hydrated && (
+          <span className={`demo-status ${token ? "demo-status-ready" : creating ? "demo-status-creating" : "demo-status-idle"}`}>
+            {token ? "Session active" : creating ? "Connecting…" : "Ready to connect"}
+          </span>
+        )}
       </div>
 
       {token ? (
-        <div className="shared-session-card">
-          <div>
+        <div className="shared-session-card shared-session-card-active">
+          <div className="shared-session-copy">
             <div className="shared-session-label">Portfolio AI session</div>
             <strong>{activeProvider} · {activeModel}</strong>
             <p>Active across the portfolio in this browser session. Your provider API key is not stored.</p>
           </div>
-          <div className="demo-actions-buttons">
-            <button className="btn btn-secondary" type="button" onClick={revokeSession}>End session</button>
-            {project === "portfolio" && <Link className="btn btn-primary" href="#work">Choose a project →</Link>}
+          <div className="demo-actions-buttons demo-session-buttons demo-session-buttons-active">
+            <button
+              className="btn btn-primary demo-launch-btn"
+              type="button"
+              onClick={launchDemo}
+              disabled={!resolvedLiveUrl}
+              title={resolvedLiveUrl ? "Open the live project with this session" : "Demo deployment URL is not configured"}
+            >
+              Open project ↗
+            </button>
+            <button className="btn btn-session-end" type="button" onClick={() => void revokeSession()}>
+              End session
+            </button>
+            {project === "portfolio" && <Link className="btn btn-secondary" href="#work">Choose a project →</Link>}
           </div>
         </div>
       ) : (
@@ -116,7 +177,16 @@ export function InteractiveDemo({
           <div className="demo-grid">
             <div className="field">
               <label htmlFor={`${project}-provider`}>Provider</label>
-              <select id={`${project}-provider`} value={provider} onChange={(event) => { const next = event.target.value as ProviderId; setProvider(next); const item = providers.find((candidate) => candidate.id === next); if (item) setModel(item.placeholder); }}>
+              <select
+                id={`${project}-provider`}
+                value={provider}
+                onChange={(event) => {
+                  const next = event.target.value as ProviderId;
+                  setProvider(next);
+                  const item = providers.find((candidate) => candidate.id === next);
+                  if (item) setModel(item.placeholder);
+                }}
+              >
                 {providers.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}
               </select>
             </div>
