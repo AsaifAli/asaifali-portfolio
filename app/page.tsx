@@ -64,16 +64,6 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="work" className="shell section work-section work-refined">
-        <div className="section-head editorial-head">
-          <div><div className="section-kicker">Selected work</div><h2>Things I’ve built along the way.</h2></div>
-          <p className="section-intro">A curated set of projects that show different sides of my engineering work. Start with the case studies that interest you.</p>
-        </div>
-        <div className="project-list featured-projects">{featured.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
-        <div className="work-more-intro"><span>More work</span><span>More experiments and systems live on the project pages.</span></div>
-        <div className="project-list secondary-projects">{remaining.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
-      </section>
-
       <section id="experience" className="shell section experience-section experience-refined">
         <div className="section-head editorial-head">
           <div><div className="section-kicker">Experience</div><h2>What I’ve been working on recently.</h2></div>
@@ -99,6 +89,16 @@ export default async function Home() {
         <div className="toolkit-grid">
           {[['AI & LLMs','Generative AI · Agentic AI · OpenAI API · Gemini API'],['Agent systems','LangGraph · LangChain · Agno · CrewAI'],['Retrieval & search','Qdrant · Hybrid search · RRF · Reranking · Tavily'],['Backend & data','Python · FastAPI · REST APIs · SQL'],['Infrastructure','Docker · Redis · PostgreSQL · Supabase · Vercel · Render'],['Quality','Pydantic · CI · Evaluation · Regression tests · Observability']].map(([title, text]) => <div className="toolkit-item" key={title}><h3>{title}</h3><p>{text}</p></div>)}
         </div>
+      </section>
+
+      <section id="work" className="shell section work-section work-refined">
+        <div className="section-head editorial-head">
+          <div><div className="section-kicker">Selected work</div><h2>Things I’ve built along the way.</h2></div>
+          <p className="section-intro">A curated set of projects that show different sides of my engineering work. Start with the case studies that interest you.</p>
+        </div>
+        <div className="project-list featured-projects">{featured.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
+        <div className="work-more-intro"><span>More work</span><span>More experiments and systems live on the project pages.</span></div>
+        <div className="project-list secondary-projects">{remaining.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
       </section>
 
       <section className="shell section playground-section" id="playground">
