@@ -24,20 +24,13 @@ export default async function Home() {
               <Link className="text-link" href="#work">See my work <span aria-hidden="true">↗</span></Link>
             </div>
           </div>
-          <div className="hero-identity">
-            <div className="identity-monogram">AA</div>
-            <div>
-              <span className="identity-label">Based in</span>
-              <strong>India</strong>
-            </div>
-            <div>
-              <span className="identity-label">Currently</span>
-              <strong>Building AI/ML systems</strong>
-            </div>
-            <div className="identity-links">
-              <a href="https://www.linkedin.com/in/sk-asaif-ali-134873243" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
-              <a href="https://github.com/AsaifAli" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
-              {CONTACT_EMAIL && <a href={`mailto:${CONTACT_EMAIL}`}>Email <span>↗</span></a>}
+          <div className="hero-personal-note">
+            <p className="hero-note-kicker">A little context</p>
+            <p>I’m based in India and spend most of my time building, testing, and shipping AI/ML systems.</p>
+            <div className="hero-note-links">
+              <a href="https://www.linkedin.com/in/sk-asaif-ali-134873243" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+              <a href="https://github.com/AsaifAli" target="_blank" rel="noreferrer">GitHub ↗</a>
+              {CONTACT_EMAIL && <a href={`mailto:${CONTACT_EMAIL}`}>Email ↗</a>}
             </div>
           </div>
         </div>
@@ -82,11 +75,16 @@ export default async function Home() {
 
       <section className="shell section toolkit-section toolkit-refined">
         <div className="section-head editorial-head">
-          <div><div className="section-kicker">Toolkit</div><h2>What I tend to reach for.</h2></div>
-          <p className="section-intro">A snapshot of the tools and technologies behind the work — not a list of everything I’ve ever touched.</p>
+          <div><div className="section-kicker">What I work with</div><h2>A practical stack, chosen for the problem.</h2></div>
+          <p className="section-intro">I keep the toolkit flexible. The common thread is Python, modern LLM tooling, retrieval, APIs, and cloud infrastructure.</p>
         </div>
-        <div className="toolkit-grid">
-          {[['AI & LLMs','Generative AI · Agentic AI · OpenAI API · Gemini API'],['Agent systems','LangGraph · LangChain · Agno · CrewAI'],['Retrieval & search','Qdrant · Hybrid search · RRF · Reranking · Tavily'],['Backend & data','Python · FastAPI · REST APIs · SQL'],['Infrastructure','Docker · Redis · PostgreSQL · Supabase · Vercel · Render'],['Quality','Pydantic · CI · Evaluation · Regression tests · Observability']].map(([title, text]) => <div className="toolkit-item" key={title}><h3>{title}</h3><p>{text}</p></div>)}
+        <div className="toolkit-lines">
+          <div><span>AI &amp; LLMs</span><strong>Generative AI · Agentic AI · OpenAI API · Gemini API</strong></div>
+          <div><span>Agent systems</span><strong>LangGraph · LangChain · Agno · CrewAI</strong></div>
+          <div><span>Retrieval &amp; search</span><strong>Qdrant · Hybrid search · RRF · Reranking · Tavily</strong></div>
+          <div><span>Backend &amp; data</span><strong>Python · FastAPI · REST APIs · SQL</strong></div>
+          <div><span>Infrastructure</span><strong>Docker · Redis · PostgreSQL · Supabase · Vercel · Render</strong></div>
+          <div><span>Quality</span><strong>Pydantic · CI · Evaluation · Regression tests · Observability</strong></div>
         </div>
       </section>
 
