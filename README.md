@@ -1,6 +1,6 @@
 # Asaif Ali — AI/ML Engineering Portfolio
 
-A full-stack engineering portfolio built with **Next.js 16, React 19, Supabase, and Vercel**, with live interactive AI demonstrations backed by a shared Portfolio LLM Gateway.
+A personal AI/ML engineering portfolio built with **Next.js 16, React 19, Supabase, and Vercel**. The site leads with Asaif, his experience, and selected work; the interactive AI demonstrations remain an optional playground.
 
 **Live portfolio:** https://asaifali-portfolio.vercel.app
 
@@ -15,6 +15,10 @@ The portfolio presents five deployed AI engineering projects:
 | EvidenceFlow | Verified RAG and research | https://langgraph-rag-hdkn.onrender.com |
 | QuoteSense | Procurement/document intelligence | https://quotation-analyzer-9m4i.onrender.com |
 | WebQA | AI-assisted web QA | https://web-crawler-agent.onrender.com |
+
+## Contact system
+
+Recruiters can contact Asaif directly through the configured email button, LinkedIn, or the portfolio contact form. The form stores messages in Supabase when configured and can optionally send an email notification through Resend when `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EMAIL` are configured.
 
 ## Interactive demo architecture
 

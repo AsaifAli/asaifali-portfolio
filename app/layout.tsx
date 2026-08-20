@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const nav = [["Work", "/#work"], ["Engineering", "/#engineering"], ["Experience", "/#experience"], ["Contact", "/#contact"]];
+const nav = [["About", "/#about"], ["Work", "/#work"], ["Experience", "/#experience"], ["Contact", "/#contact"]];
 const personJsonLd = {
   "@context": "https://schema.org", "@type": "Person", name: "Asaif Ali", jobTitle: "AI/ML Engineer", url: SITE_URL,
   sameAs: ["https://github.com/AsaifAli", "https://www.linkedin.com/in/sk-asaif-ali-134873243"],

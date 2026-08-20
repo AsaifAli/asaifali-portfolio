@@ -1,3 +1,18 @@
 import Link from "next/link";
 import type { Project } from "@/lib/projects";
-export function ProjectCard({ project }: { project: Project }) { return <article className={`project-card ${project.accent}`}><div className="card-top"><span className="card-number">{project.number}</span><span className="status"><span className="status-dot" aria-hidden="true" />{project.status}</span></div><div className="eyebrow">{project.eyebrow}</div><h3>{project.name}</h3><p>{project.short}</p><div className="tags" aria-label="Technologies">{project.tags.map(tag=><span className="tag" key={tag}>{tag}</span>)}</div><Link className="card-link" href={`/projects/${project.slug}`} aria-label={`Explore ${project.name}`}><span>Explore project</span><span aria-hidden="true">↗</span></Link></article>; }
+
+export function ProjectCard({ project }: { project: Project }) {
+  return (
+    <article className={`project-card editorial-project ${project.accent}`}>
+      <div className="card-top"><span className="card-number">{project.number}</span><span className="status"><span className="status-dot" aria-hidden="true" />{project.status}</span></div>
+      <div className="eyebrow">{project.eyebrow}</div>
+      <h3>{project.name}</h3>
+      <p>{project.short}</p>
+      <div className="tags" aria-label="Technologies">{project.tags.map((tag) => <span className="tag" key={tag}>{tag}</span>)}</div>
+      <div className="project-card-footer">
+        <Link className="card-link" href={`/projects/${project.slug}`} aria-label={`Read the ${project.name} case study`}><span>Read case study</span><span aria-hidden="true">↗</span></Link>
+        <a className="card-link secondary-card-link" href={project.github} target="_blank" rel="noreferrer"><span>Source</span><span aria-hidden="true">↗</span></a>
+      </div>
+    </article>
+  );
+}
