@@ -67,9 +67,19 @@ export function InteractiveDemo({
           <div className="demo-footnote">
             {liveUrl ? "Temporary gateway session · reusable across portfolio projects" : "Demo deployment URL is not configured for this project yet"}
           </div>
-          <div className="demo-actions-buttons">
-            {token && liveUrl && <button className="btn btn-primary" type="button" onClick={launchDemo}>Launch live demo ↗</button>}
-            {token ? <button className="btn btn-secondary" type="button" onClick={revokeSession}>End session</button> : <Link className="btn btn-primary" href="/#demo">Open AI session →</Link>}
+          <div className="demo-actions-buttons demo-session-buttons">
+            {token && liveUrl && (
+              <button className="btn btn-primary" type="button" onClick={launchDemo}>
+                Open project ↗
+              </button>
+            )}
+            {token ? (
+              <button className="btn btn-secondary" type="button" onClick={revokeSession}>
+                End session
+              </button>
+            ) : (
+              <Link className="btn btn-primary" href="/#demo">Open AI session →</Link>
+            )}
           </div>
         </div>
       </section>

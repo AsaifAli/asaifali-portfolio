@@ -150,3 +150,14 @@
   .carousel-progress-segment{width:28px}
 }
 @media (prefers-reduced-motion:reduce){.carousel-arrow,.carousel-progress-segment{transition:none}}
+
+/* Final interaction polish */
+.demo-session-buttons{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;align-items:center}
+.shared-session-card .demo-actions-buttons{min-width:0}
+@media (max-width:760px){
+  .demo-session-buttons{width:100%;justify-content:flex-start}
+  .demo-session-buttons .btn{flex:1 1 auto}
+}
+.carousel-pagination{padding-top:14px}
+.carousel-progress{justify-content:flex-start}
+.carousel-progress-segment{flex:1 1 0;min-width:20px;max-width:72px}

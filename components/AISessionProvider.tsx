@@ -96,8 +96,11 @@ export function AISessionProvider({ children }: { children: React.ReactNode }) {
   );
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState("");
-
-  const hydrated = typeof window !== "undefined";
+  const hydrated = useSyncExternalStore(
+    subscribeToSession,
+    () => true,
+    () => false,
+  );
 
   useEffect(() => {
     if (!session.expiresAt) return;

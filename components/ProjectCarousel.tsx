@@ -37,7 +37,7 @@ export function ProjectCarousel({ projects }: { projects: Project[] }) {
         <div className="carousel-card-top">
           <div className="carousel-meta">
             <span className="card-number">{position}</span>
-            <span className="carousel-kind">{index === 0 ? "Featured build" : "Independent build"}</span>
+            {index === 0 && <span className="carousel-kind">Featured build</span>}
           </div>
 
           <div className="carousel-nav" aria-label="Project navigation">
@@ -99,9 +99,8 @@ export function ProjectCarousel({ projects }: { projects: Project[] }) {
         </div>
       </article>
 
-      <div className="carousel-pagination" aria-live="polite">
-        <span className="carousel-pagination-count">{position}</span>
-        <div className="carousel-progress" aria-hidden="true">
+      <div className="carousel-pagination" aria-hidden="true">
+        <div className="carousel-progress">
           {projects.map((item, itemIndex) => (
             <button
               key={item.slug}
@@ -113,7 +112,6 @@ export function ProjectCarousel({ projects }: { projects: Project[] }) {
             />
           ))}
         </div>
-        <span className="carousel-hint">Use ← / → to browse</span>
       </div>
     </div>
   );
