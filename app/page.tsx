@@ -80,16 +80,6 @@ export default async function Home() {
 
 
 
-      <section id="work" className="shell section work-section work-refined">
-        <div className="section-head editorial-head">
-          <div><div className="section-kicker">Selected work</div><h2>A few things I’ve built.</h2></div>
-          <p className="section-intro">A few projects that show different sides of the way I think and build.</p>
-        </div>
-        <div className="project-list featured-projects">{featured.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
-        <div className="work-more-intro"><span>More work</span><span>More experiments and systems live on the project pages.</span></div>
-        <div className="project-list secondary-projects">{remaining.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
-      </section>
-
       <section className="shell section toolkit-section toolkit-refined">
         <div className="section-head editorial-head">
           <div><div className="section-kicker">What I work with</div><h2>A practical stack, chosen for the problem.</h2></div>
@@ -103,6 +93,17 @@ export default async function Home() {
           <div><span>Infrastructure</span><strong>Docker · Redis · PostgreSQL · Supabase · Vercel · Render</strong></div>
           <div><span>Quality</span><strong>Pydantic · CI · Evaluation · Regression tests · Observability</strong></div>
         </div>
+      </section>
+
+
+      <section id="work" className="shell section work-section work-refined">
+        <div className="section-head editorial-head">
+          <div><div className="section-kicker">Selected work</div><h2>A few things I’ve built.</h2></div>
+          <p className="section-intro">A few projects that show different sides of the way I think and build.</p>
+        </div>
+        <div className="project-list featured-projects">{featured.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
+        <div className="work-more-intro"><span>More work</span><span>More experiments and systems live on the project pages.</span></div>
+        <div className="project-list secondary-projects">{remaining.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
       </section>
 
       <section className="shell section playground-section" id="playground">
