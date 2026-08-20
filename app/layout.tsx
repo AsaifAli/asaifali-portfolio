@@ -38,7 +38,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <MobileNav nav={nav} />
     </div></header>
     {children}
-    <footer className="site-footer"><div className="shell footer-inner"><span>© {new Date().getFullYear()} Asaif Ali</span><span>AI / ML · Generative AI · Agentic AI · LLM Systems</span></div></footer>
+    <footer className="site-footer"><div className="shell footer-inner"><span>© {new Date().getFullYear()} Asaif Ali</span><span>AI/ML engineer · India</span></div></footer>
           </AISessionProvider>
       </body></html>;
 }

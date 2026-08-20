@@ -4,7 +4,7 @@ import type { Project } from "@/lib/projects";
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <article className={`project-card editorial-project ${project.accent}`}>
-      <div className="card-top"><span className="card-number">{project.number}</span><span className="card-kind">Case study</span></div>
+      <div className="card-top"><span className="card-number">{project.number}</span></div>
       <div className="eyebrow">{project.eyebrow}</div>
       <h3>{project.name}</h3>
       <p>{project.short}</p>

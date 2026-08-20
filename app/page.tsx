@@ -13,20 +13,20 @@ export default async function Home() {
   return (
     <main>
       <section className="shell hero-personal hero-refined">
-        <div className="hero-refined-grid">
+        <div className="hero-refined-grid hero-personal-simple">
           <div className="hero-refined-copy">
-            <div className="eyebrow">AI/ML ENGINEER</div>
+            <div className="eyebrow">AI / MACHINE LEARNING</div>
             <h1>Hi, I’m <span className="name-accent">Asaif.</span></h1>
             <p className="hero-lede">I build AI systems, explore difficult problems, and turn good ideas into software people can actually use.</p>
-            <p className="hero-support">My work sits around Generative AI, Agentic AI, RAG, automation, and AI-assisted software engineering.</p>
+            <p className="hero-support">My work sits around Generative AI, Agentic AI, retrieval, automation, and AI-assisted software engineering.</p>
             <div className="hero-actions">
-              <Link className="btn btn-primary" href="#about">About me</Link>
+              <Link className="btn btn-primary" href="#about">A little about me</Link>
               <Link className="text-link" href="#work">See my work <span aria-hidden="true">↗</span></Link>
             </div>
           </div>
-          <div className="hero-personal-note">
-            <p className="hero-note-kicker">A little context</p>
-            <p>I’m based in India and spend most of my time building, testing, and shipping AI/ML systems.</p>
+          <div className="hero-personal-note hero-human-note">
+            <p className="hero-note-kicker">Based in India</p>
+            <p>I enjoy the space between experimentation and dependable software — trying things, learning fast, and making the next version better.</p>
             <div className="hero-note-links">
               <a href="https://www.linkedin.com/in/sk-asaif-ali-134873243" target="_blank" rel="noreferrer">LinkedIn ↗</a>
               <a href="https://github.com/AsaifAli" target="_blank" rel="noreferrer">GitHub ↗</a>
@@ -65,12 +65,29 @@ export default async function Home() {
           <article className="timeline-item">
             <div className="timeline-dot" aria-hidden="true" />
             <div className="timeline-period">2024 — NOW</div>
-            <div className="timeline-main"><h3>Software Engineer · AI/ML</h3>
-              <p>Working across Agentic RAG, LLM automation, multi-agent engineering workflows, application modernization, retrieval systems, and AI-assisted software engineering.</p>
-              <p>I spend a lot of time connecting the AI layer to the engineering around it: APIs, validation, evaluation, persistence, observability, and cloud deployment.</p>
+            <div className="timeline-main">
+              <h3>Software Engineer · AI/ML</h3>
+              <p>I work across Agentic RAG, LLM automation, multi-agent engineering workflows, application modernization, retrieval systems, and AI-assisted software engineering.</p>
+              <div className="experience-focus-grid">
+                <div><span>01</span><strong>AI systems</strong><p>Building retrieval, agent, and LLM workflows around real application needs.</p></div>
+                <div><span>02</span><strong>Engineering around AI</strong><p>Connecting models to APIs, validation, evaluation, persistence, observability, and deployment.</p></div>
+                <div><span>03</span><strong>Making systems dependable</strong><p>Thinking through messy inputs, failure paths, quality, and the details that make a system useful.</p></div>
+              </div>
             </div>
           </article>
         </div>
+      </section>
+
+
+
+      <section id="work" className="shell section work-section work-refined">
+        <div className="section-head editorial-head">
+          <div><div className="section-kicker">Selected work</div><h2>A few things I’ve built.</h2></div>
+          <p className="section-intro">A few projects that show different sides of the way I think and build.</p>
+        </div>
+        <div className="project-list featured-projects">{featured.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
+        <div className="work-more-intro"><span>More work</span><span>More experiments and systems live on the project pages.</span></div>
+        <div className="project-list secondary-projects">{remaining.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
       </section>
 
       <section className="shell section toolkit-section toolkit-refined">
@@ -86,16 +103,6 @@ export default async function Home() {
           <div><span>Infrastructure</span><strong>Docker · Redis · PostgreSQL · Supabase · Vercel · Render</strong></div>
           <div><span>Quality</span><strong>Pydantic · CI · Evaluation · Regression tests · Observability</strong></div>
         </div>
-      </section>
-
-      <section id="work" className="shell section work-section work-refined">
-        <div className="section-head editorial-head">
-          <div><div className="section-kicker">Selected work</div><h2>Things I’ve built along the way.</h2></div>
-          <p className="section-intro">A curated set of projects that show different sides of my engineering work. Start with the case studies that interest you.</p>
-        </div>
-        <div className="project-list featured-projects">{featured.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
-        <div className="work-more-intro"><span>More work</span><span>More experiments and systems live on the project pages.</span></div>
-        <div className="project-list secondary-projects">{remaining.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
       </section>
 
       <section className="shell section playground-section" id="playground">
