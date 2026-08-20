@@ -57,51 +57,57 @@ export default async function Home() {
 
       <section id="experience" className="shell section experience-section experience-refined">
         <div className="section-head editorial-head">
-          <div><div className="section-kicker">Experience</div><h2>What I’ve been working on recently.</h2></div>
+          <div>
+            <div className="section-kicker">Experience &amp; focus</div>
+            <h2>The work I do professionally — and the things I’ve learned building it.</h2>
+          </div>
+          <p className="section-intro">My day job gives me real engineering problems to solve. Outside work, I take the ideas that stay with me and turn them into personal systems, experiments, and working products.</p>
         </div>
-        <div className="timeline">
-          <div className="timeline-line" aria-hidden="true" />
-          <article className="timeline-item">
-            <div className="timeline-dot" aria-hidden="true" />
-            <div className="timeline-period">2024 — PRESENT</div>
-            <div className="timeline-main">
-              <h3>Software Engineer · AI/ML</h3>
-              <div className="experience-company">BEBO Technologies Pvt Ltd</div>
-              <p>I work across Agentic RAG, LLM automation, multi-agent engineering workflows, application modernization, retrieval systems, and AI-assisted software engineering.</p>
-              <div className="experience-focus-grid">
-                <div><span>01</span><strong>AI systems</strong><p>Building retrieval, agent, and LLM workflows around real application needs.</p></div>
-                <div><span>02</span><strong>Engineering around AI</strong><p>Connecting models to APIs, validation, evaluation, persistence, observability, and deployment.</p></div>
-                <div><span>03</span><strong>Making systems dependable</strong><p>Thinking through messy inputs, failure paths, quality, and the details that make a system useful.</p></div>
-              </div>
+
+        <div className="experience-combined-grid">
+          <article className="experience-summary">
+            <div className="timeline-period">NOV 2024 — PRESENT</div>
+            <h3>Software Engineer · AI/ML</h3>
+            <div className="experience-company">Bebo Technologies Pvt Ltd</div>
+            <div className="experience-summary-copy">
+              <p>I work on AI/ML systems that sit close to real product and engineering problems — building automation, retrieval and agentic workflows, and the infrastructure around them. A lot of the work is less about choosing a model and more about making the whole system behave well: connecting APIs and data sources, structuring context, validating outputs, handling failure paths, and creating interfaces that people can actually use.</p>
+              <p>Over time, that has led me deeper into agentic systems, RAG, multi-agent orchestration, application modernization, and AI-assisted engineering. I enjoy the point where a promising experiment becomes a dependable piece of software — and I’ve learned to think about evaluation, persistence, observability, deployment, and edge cases as part of the product rather than afterthoughts.</p>
+              <p>The personal projects on this site grow out of that same curiosity. They are where I get to ask, <em>“What would this look like if I took the idea a little further?”</em></p>
             </div>
           </article>
+
+          <div className="experience-focus-grid experience-focus-grid-combined">
+            <div><span>01</span><strong>Agentic systems</strong><p>RAG, tool use, orchestration, memory, and multi-agent workflows around real application problems.</p></div>
+            <div><span>02</span><strong>Engineering around models</strong><p>APIs, validation, retrieval, evaluation, persistence, deployment, and the pieces that make AI usable.</p></div>
+            <div><span>03</span><strong>From idea to software</strong><p>Taking an experiment beyond the demo and thinking through quality, failure paths, and operations.</p></div>
+          </div>
+        </div>
+
+        <div className="work-tools work-tools-combined">
+          <div className="work-tools-head">
+            <div>
+              <div className="section-kicker">What I work with</div>
+              <h3>A practical stack, chosen for the problem.</h3>
+            </div>
+            <p>I keep the toolkit flexible. The common thread is Python, modern LLM tooling, retrieval, APIs, and cloud infrastructure.</p>
+          </div>
+          <div className="toolkit-lines">
+            <div><span>AI &amp; LLMs</span><strong>Generative AI · Agentic AI · OpenAI API · Gemini API</strong></div>
+            <div><span>Agent systems</span><strong>LangGraph · LangChain · Agno · CrewAI</strong></div>
+            <div><span>Retrieval &amp; search</span><strong>Qdrant · Hybrid search · RRF · Reranking · Tavily</strong></div>
+            <div><span>Backend &amp; data</span><strong>Python · FastAPI · REST APIs · SQL · PostgreSQL · Redis</strong></div>
+            <div><span>Infrastructure</span><strong>Docker · Supabase · Vercel · Render · AWS</strong></div>
+          </div>
         </div>
       </section>
-
-
-
-      <section className="shell section toolkit-section toolkit-refined">
-        <div className="section-head editorial-head">
-          <div><div className="section-kicker">What I work with</div><h2>A practical stack, chosen for the problem.</h2></div>
-          <p className="section-intro">I keep the toolkit flexible. The common thread is Python, modern LLM tooling, retrieval, APIs, and cloud infrastructure.</p>
-        </div>
-        <div className="toolkit-lines">
-          <div><span>AI &amp; LLMs</span><strong>Generative AI · Agentic AI · OpenAI API · Gemini API</strong></div>
-          <div><span>Agent systems</span><strong>LangGraph · LangChain · Agno · CrewAI</strong></div>
-          <div><span>Retrieval &amp; search</span><strong>Qdrant · Hybrid search · RRF · Reranking · Tavily</strong></div>
-          <div><span>Backend &amp; data</span><strong>Python · FastAPI · REST APIs · SQL</strong></div>
-          <div><span>Infrastructure</span><strong>Docker · Redis · PostgreSQL · Supabase · Vercel · Render</strong></div>
-        </div>
-      </section>
-
 
       <section id="work" className="shell section work-section work-refined">
         <div className="section-head editorial-head">
-          <div><div className="section-kicker">Selected work</div><h2>A few things I’ve built.</h2></div>
-          <p className="section-intro">A few projects that show different sides of the way I think and build.</p>
+          <div><div className="section-kicker">Selected personal builds</div><h2>A few things I’ve built outside the day job.</h2></div>
+          <p className="section-intro">These are the projects where I give myself room to explore a problem, test an idea, and take it far enough to become a real working system.</p>
         </div>
-        <div className="project-list featured-projects">{featured.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
-        <div className="work-more-intro"><span>More work</span><span>More experiments and systems live on the project pages.</span></div>
+        <div className="project-list featured-projects">{featured.map((project, index) => <ProjectCard key={project.slug} project={project} featured={index === 0} />)}</div>
+        <div className="work-more-intro"><span>More personal work</span><span>More experiments and systems live on the project pages.</span></div>
         <div className="project-list secondary-projects">{remaining.map((project) => <ProjectCard key={project.slug} project={project} />)}</div>
       </section>
 
