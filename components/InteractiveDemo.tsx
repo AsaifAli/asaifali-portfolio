@@ -119,7 +119,7 @@ export function InteractiveDemo({
             <div className="demo-footnote">
               One session · reusable across project pages · provider key never stored
             </div>
-            <Link className="btn btn-secondary" href="/#playground">
+            <Link className="btn btn-secondary" href="/#work">
               Configure session →
             </Link>
           </div>

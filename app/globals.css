@@ -174,3 +174,30 @@
 @media (max-width:980px){.shared-session-card-active{align-items:flex-start}.demo-session-buttons-active{width:100%;justify-content:flex-start}.demo-session-buttons-active .btn{flex:0 1 auto}}
 @media (max-width:640px){.demo-session-buttons-active{width:100%;display:grid;grid-template-columns:1fr 1fr}.demo-session-buttons-active .btn{width:100%}.demo-launch-btn{min-width:0}.btn-session-end{min-width:0}}
 @media (prefers-color-scheme: dark){.btn-session-end{color:var(--text);border-color:#555b63;background:transparent}.btn-session-end:hover{background:var(--surface);border-color:#8c939d}}
+/* Recruiter-facing homepage refinements */
+.recruiter-hero .section-kicker{margin-bottom:18px}
+.recruiter-hero .hero-lede{max-width:780px;font-size:19px;line-height:1.6}
+.recruiter-hero-note{max-width:360px}
+.recruiter-proof-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:52px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.recruiter-proof-strip>div{display:grid;gap:5px;padding:18px 20px 18px 0;border-right:1px solid var(--line)}
+.recruiter-proof-strip>div:not(:first-child){padding-left:20px}
+.recruiter-proof-strip>div:last-child{border-right:0}
+.recruiter-proof-strip strong{font-size:17px;line-height:1}
+.recruiter-proof-strip span{font-size:12px;line-height:1.45;color:var(--muted)}
+@media (max-width:980px){
+  .recruiter-proof-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .recruiter-proof-strip>div:nth-child(2){border-right:0}
+  .recruiter-proof-strip>div:nth-child(3){border-top:1px solid var(--line)}
+  .recruiter-proof-strip>div:nth-child(4){border-top:1px solid var(--line)}
+  .recruiter-proof-strip>div:nth-child(3),
+  .recruiter-proof-strip>div:nth-child(4){padding-top:18px}
+}
+@media (max-width:700px){
+  .recruiter-hero .hero-lede{font-size:17px}
+  .recruiter-proof-strip{grid-template-columns:1fr;margin-top:38px}
+  .recruiter-proof-strip>div,
+  .recruiter-proof-strip>div:not(:first-child),
+  .recruiter-proof-strip>div:nth-child(3),
+  .recruiter-proof-strip>div:nth-child(4){padding:15px 0;border-right:0;border-top:1px solid var(--line)}
+  .recruiter-proof-strip>div:first-child{border-top:0}
+}
