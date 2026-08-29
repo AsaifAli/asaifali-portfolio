@@ -109,7 +109,7 @@ export default async function Home() {
           <div className="toolkit-lines">
             <div><span>AI &amp; LLMs</span><strong>Generative AI · Agentic AI · OpenAI API · Gemini API</strong></div>
             <div><span>Agent systems</span><strong>LangGraph · LangChain · Agno · CrewAI</strong></div>
-            <div><span>Retrieval &amp; search</span><strong>Qdrant · Hybrid search · RRF · Reranking · Tavily</strong></div>
+            <div><span>Retrieval &amp; search</span><strong>OpenSearch · BM25 · Sparse retrieval · RRF · Jina · Tavily</strong></div>
             <div><span>Backend &amp; data</span><strong>Python · FastAPI · REST APIs · SQL · PostgreSQL · Redis</strong></div>
             <div><span>Infrastructure</span><strong>Docker · Supabase · Vercel · Render · AWS</strong></div>
           </div>

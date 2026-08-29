@@ -12,9 +12,15 @@ The portfolio presents five deployed AI engineering projects:
 |---|---|---|
 | LegacyLens | Agentic software modernization | https://ai-code-modernization-ui.onrender.com |
 | FlowPilot | Agentic automation | https://ai-automation-ui-ac2c.onrender.com |
-| EvidenceFlow | Verified RAG and research | https://langgraph-rag-hdkn.onrender.com |
+| EvidenceFlow | Verified sparse-first RAG and research | https://langgraph-rag-hdkn.onrender.com |
 | QuoteSense | Procurement/document intelligence | https://quotation-analyzer-9m4i.onrender.com |
 | WebQA | AI-assisted web QA | https://web-crawler-agent.onrender.com |
+
+## EvidenceFlow architecture
+
+EvidenceFlow has evolved beyond the original dense-vector RAG setup. The current retrieval path is **sparse-first on OpenSearch**, with BM25/lexical retrieval, reciprocal-rank fusion, and **Jina cross-encoder reranking** before evidence-grounded synthesis. Agentic routing can choose knowledge-base retrieval, web research, both, or a direct response.
+
+The system also maintains turn-scoped evidence provenance and applies citation/claim verification, evidence checks, and fail-closed behavior when support is insufficient.
 
 ## Contact system
 

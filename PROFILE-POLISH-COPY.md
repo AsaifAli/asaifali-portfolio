@@ -10,7 +10,7 @@ My work spans Agentic AI, RAG, LLM applications, document intelligence, AI-assis
 
 Selected work includes:
 • AI Code Modernization — repository intelligence, migration planning, agentic transformation, and post-migration QA
-• EvidenceFlow — LangGraph RAG with hybrid retrieval, reranking, web research, and citation verification
+• EvidenceFlow — LangGraph RAG with sparse-first retrieval, RRF fusion, Jina reranking, web research, and citation verification
 • QuoteSense — structured quotation extraction with deterministic procurement logic
 • FlowPilot — asynchronous AI workflows with Redis/RQ, approvals, persistence, and observability
 • WebQA Intelligence — Playwright-based browser intelligence and evidence-grounded QA
