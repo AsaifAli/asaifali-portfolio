@@ -9,8 +9,8 @@ I build production-oriented AI systems that combine LLMs with deterministic engi
 My work spans Agentic AI, RAG, LLM applications, document intelligence, AI-assisted software engineering, and asynchronous AI automation. I focus on systems that go beyond prompt → response and remain testable, explainable, and operational.
 
 Selected work includes:
-• AI Code Modernization — repository intelligence, migration planning, agentic transformation, and post-migration QA
-• EvidenceFlow — LangGraph RAG with sparse-first retrieval, RRF fusion, Jina reranking, web research, and citation verification
+• LegacyLens — repository intelligence, migration planning, context-grounded code conversion, syntax-aware validation, bounded repair, and post-migration QA
+• EvidenceFlow — LangGraph RAG with hybrid retrieval, reranking, web research, and citation verification
 • QuoteSense — structured quotation extraction with deterministic procurement logic
 • FlowPilot — asynchronous AI workflows with Redis/RQ, approvals, persistence, and observability
 • WebQA Intelligence — Playwright-based browser intelligence and evidence-grounded QA

@@ -24,16 +24,16 @@ export const projects: Project[] = [
     number: "01",
     name: "LegacyLens",
     eyebrow: "Agentic software modernization",
-    short: "Analyze legacy repositories, plan migrations, transform code, and validate behavior with automated quality gates.",
-    description: "An agentic modernization platform that treats migration as an engineering workflow rather than a one-shot code translation. It combines repository intelligence, planning, transformation, dependency awareness, post-migration validation, provenance, and release gating.",
-    tags: ["Agentic AI", "Code Intelligence", "Agno", "FastAPI", "Docker"],
+    short: "Analyze legacy repositories, plan migrations, transform code, validate generated source, and enforce release gates.",
+    description: "An agentic modernization platform that treats migration as a verification workflow rather than a one-shot translation. It combines repository intelligence, migration planning, dependency context, deterministic conversion guidance, context-grounded LLM transformation, syntax-aware validation, bounded repair, post-migration QA, and release gating.",
+    tags: ["Agentic AI", "Code Intelligence", "Agno", "FastAPI", "Docker", "AST / CTags"],
     github: "https://github.com/AsaifAli/AI-Code-Modernization-Platform",
     status: "Deployed",
     accent: "cyan",
     problem: "Legacy migration is difficult to trust when translation, dependency changes, validation, and release readiness are handled as disconnected steps.",
-    solution: "A staged multi-agent workflow performs discovery, planning, conversion, semantic validation, repair, and release gating while retaining evidence and migration state.",
-    architecture: ["Upload / source workspace", "Repository scanner + code intelligence", "Agentic planning + transformation", "Knowledge / dependency analysis", "Post-migration validation + repair", "Release gate + reports"],
-    decisions: ["Keep deterministic validation outside the LLM", "Make migration state observable and resumable", "Treat repair as a re-validation loop", "Separate provider/model configuration from workflow logic"],
+    solution: "A staged multi-agent workflow performs discovery, planning, context-grounded conversion, syntax validation, bounded repair, post-migration QA, and release gating while retaining migration state and evidence.",
+    architecture: ["Upload / source workspace", "Repository scanner + code intelligence", "Migration planning + symbol mapping", "Context-grounded conversion", "Syntax validation + bounded repair", "Post-migration QA + release gate"],
+    decisions: ["Keep deterministic validation outside the LLM", "Use the shared LLM Gateway as the inference boundary", "Treat repair as a re-validation loop", "Make migration state observable and resumable"],
     reliability: ["Quality gates", "Semantic verification", "Security/provenance checks", "CI regression tests", "Persisted migration status"],
     liveUrl: "https://ai-code-modernization-ui.onrender.com",
     star: {
@@ -41,12 +41,14 @@ export const projects: Project[] = [
       task: "Build a modernization workflow that could understand a repository before changing it, plan the migration, transform code with context, and prove whether the result was ready to release.",
       action: [
         "Used AST/CTags analysis and dependency intelligence to build deterministic repository context before generation.",
-        "Stored analysis artifacts in Qdrant and retrieved bounded context instead of sending the whole repository to the model.",
-        "Separated planning, context-grounded conversion, post-migration QA, repair, and release gating into explicit workflow stages."
+        "Retrieved bounded repository and dependency context so the model receives the evidence needed for the requested migration unit rather than an unbounded repository dump.",
+        "Separated planning, context-grounded conversion, syntax validation, bounded repair, post-migration QA, and release gating into explicit workflow stages.",
+        "Kept inference behind the shared Portfolio LLM Gateway using a request-scoped JWT rather than exposing provider credentials to LegacyLens."
       ],
       result: [
-        "Turned modernization into an observable engineering workflow rather than a one-shot LLM translation.",
-        "Added structural and execution-aware validation plus a release gate so generated code could be inspected before packaging."
+        "Turned modernization into an observable verification workflow rather than a one-shot LLM translation.",
+        "Added syntax-aware validation and bounded repair so generated code is checked before it can progress to post-migration QA.",
+        "Release readiness remains gated by deterministic and semantic validation evidence rather than model confidence."
       ]
     },
   },
@@ -55,24 +57,24 @@ export const projects: Project[] = [
     number: "02",
     name: "EvidenceFlow",
     eyebrow: "Verified RAG & research",
-    short: "Sparse-first retrieval, reranking, web research, evidence verification, and fail-closed answer generation.",
-    description: "A LangGraph-based RAG system designed around evidence rather than raw model confidence. It routes between knowledge-base retrieval and web research, uses OpenSearch sparse-first retrieval with reciprocal-rank fusion and reranking, and verifies answer claims against collected evidence.",
-    tags: ["LangGraph", "OpenSearch", "BM25", "RRF", "Jina", "Tavily"],
+    short: "Hybrid retrieval, reranking, web research, evidence verification, and fail-closed answer generation.",
+    description: "A LangGraph-based RAG system designed around evidence rather than raw model confidence. It routes between knowledge-base retrieval and web research, uses hybrid retrieval with reciprocal-rank fusion and reranking, and verifies answer claims against collected evidence.",
+    tags: ["LangGraph", "Qdrant", "BM25", "RRF", "Tavily"],
     github: "https://github.com/AsaifAli/LangGraph-RAG",
     status: "Deployed",
     accent: "violet",
     problem: "RAG systems can retrieve plausible text while still producing unsupported claims or overconfident answers.",
     solution: "The pipeline separates retrieval, evidence synthesis, citation verification, and answer policy so unsupported responses can fail closed instead of being presented as fact.",
-    architecture: ["Query understanding + routing", "OpenSearch sparse retrieval", "RRF fusion + cross-encoder reranking", "Evidence synthesis", "Citation / claim verification", "Final guarded response"],
+    architecture: ["Query understanding + routing", "Dense + lexical retrieval", "RRF fusion + cross-encoder reranking", "Evidence synthesis", "Citation / claim verification", "Final guarded response"],
     decisions: ["Preserve evidence IDs through the graph", "Keep tool execution provider-agnostic", "Use deterministic citation checks", "Separate document summaries from chunk analysis"],
-    reliability: ["Evidence-grounded synthesis", "Citation verification", "Fail-closed behavior", "Evidence safety boundary", "Regression diagnostics"],
+    reliability: ["Evidence-grounded synthesis", "Citation verification", "Fail-closed behavior", "Hybrid retrieval", "Regression diagnostics"],
     liveUrl: "https://langgraph-rag-hdkn.onrender.com",
     star: {
       situation: "RAG systems can retrieve plausible text and still produce answers that are unsupported, overconfident, or weakly cited.",
       task: "Build a research assistant where retrieval, evidence collection, citation verification, and answer policy are explicit parts of the system.",
       action: [
         "Added agentic routing so a query can use the knowledge base, web research, both, or neither.",
-        "Used OpenSearch sparse-first retrieval with reciprocal-rank fusion and Jina cross-encoder reranking to improve evidence selection before synthesis.",
+        "Combined dense and sparse retrieval with reciprocal-rank fusion and cross-encoder reranking.",
         "Kept a turn-scoped evidence registry, verified citations against the exact evidence set, and added fail-closed behavior when support is insufficient."
       ],
       result: [
