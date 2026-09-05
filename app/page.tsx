@@ -80,7 +80,7 @@ export default async function Home() {
 
         <div className="experience-combined-grid">
           <article className="experience-summary">
-            <div className="timeline-period">NOV 2024 — PRESENT</div>
+            <div className="timeline-period">NOV 2024 — AUG 2026</div>
             <h3>Software Engineer · AI/ML</h3>
             <div className="experience-company">Bebo Technologies Pvt Ltd</div>
             <div className="experience-summary-copy">
