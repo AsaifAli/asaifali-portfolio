@@ -118,6 +118,8 @@
 .carousel-bottom .tag{border-color:var(--line);color:var(--muted);padding:6px 9px;background:transparent}
 .carousel-footer{display:flex;align-items:center;justify-content:flex-end;gap:18px;margin-top:0}
 .carousel-explore{padding-inline:20px}
+.engineering-hub-callout{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:28px;margin-top:34px;padding:26px 0 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.engineering-hub-copy{min-width:0}.engineering-hub-copy .section-kicker{margin-bottom:9px}.engineering-hub-copy h3{margin:0;font-size:30px;letter-spacing:-.04em;font-weight:780}.engineering-hub-copy p{margin:8px 0 0;max-width:900px;color:var(--muted);font-size:14px;line-height:1.68}.engineering-hub-points{display:flex;gap:0;flex-wrap:wrap;margin-top:13px;color:var(--muted);font:700 11px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}.engineering-hub-points span{padding:0 12px;border-left:1px solid var(--line)}.engineering-hub-points span:first-child{padding-left:0;border-left:0}.engineering-hub-button{white-space:nowrap;padding-inline:20px}
 .carousel-pagination{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;padding-top:18px}
 .carousel-pagination-count{font:800 11px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;color:var(--text);white-space:nowrap}
 .carousel-progress{display:flex;gap:5px;align-items:center;min-width:0}
@@ -127,6 +129,7 @@
 .carousel-hint{justify-self:end;color:var(--muted);font-size:12px}
 
 @media (max-width:900px){
+  .engineering-hub-callout{grid-template-columns:1fr;gap:18px;padding:22px 0}.engineering-hub-button{justify-self:start;white-space:normal}
   .carousel-heading{grid-template-columns:1fr;gap:18px;padding-top:34px}
   .carousel-summary-grid{grid-template-columns:1fr;gap:26px}
   .carousel-bottom{grid-template-columns:1fr;gap:24px}
@@ -135,6 +138,7 @@
   .carousel-hint{grid-column:1/-1;justify-self:start}
 }
 @media (max-width:700px){
+  .engineering-hub-points{display:block;line-height:1.9}.engineering-hub-points span{display:inline;padding:0 9px}.engineering-hub-points span:first-child{padding-left:0}
   .project-carousel{margin-top:24px}
   .carousel-card{padding:22px 0 26px}
   .carousel-card-top{align-items:flex-start}

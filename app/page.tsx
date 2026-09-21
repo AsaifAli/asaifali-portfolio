@@ -122,6 +122,31 @@ export default async function Home() {
           <p className="section-intro">These are the projects where I give myself room to explore a problem, test an idea, and take it far enough to become a real working system.</p>
         </div>
         <ProjectCarousel projects={featured.concat(remaining)} />
+
+        <div className="engineering-hub-callout">
+          <div className="engineering-hub-copy">
+            <div className="section-kicker">Built beyond the individual projects</div>
+            <h3>AI Engineering Hub</h3>
+            <p>One reusable engineering layer across five AI systems — with project adapters, task-specific evaluation, LLMOps telemetry, guardrails, human approval, regression gates, and n8n orchestration.</p>
+            <div className="engineering-hub-points" aria-label="AI Engineering Hub capabilities">
+              <span>5 AI systems</span>
+              <span>Task-specific evals</span>
+              <span>LLMOps telemetry</span>
+              <span>Guardrails + HITL</span>
+              <span>CI regression gates</span>
+              <span>n8n orchestration</span>
+            </div>
+          </div>
+          <a
+            className="btn btn-primary engineering-hub-button"
+            href="https://ai-engineering-evaluation-harness.onrender.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Explore the AI Engineering Hub in a new tab"
+          >
+            Explore the AI Engineering Hub <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </section>
 
       <section id="contact" className="shell section contact-section contact-refined">
